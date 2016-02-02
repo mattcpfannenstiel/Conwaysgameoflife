@@ -7,22 +7,33 @@ import golly as g
 
 def neighborcount(x, y):
     c = 0
-    if g.getcell(x - 1, y) == 1:
-        c += 1
-    if g.getcell(x - 1, y - 1) == 1:
-        c += 1
-    if g.getcell(x, y - 1) == 1:
-        c += 1
-    if g.getcell(x - 1, y + 1) == 1:
-        c += 1
-    if g.getcell(x, y + 1) == 1:
-        c += 1
-    if g.getcell(x + 1, y + 1) == 1:
-        c += 1
-    if g.getcell(x + 1, y - 1) == 1:
-        c += 1
-    if g.getcell(x + 1, y) == 1:
-        c += 1
+    j = x -1
+    while j <= x + 1:
+        k = y - 1
+        while k <= y +1:
+            if k == y and j == x:
+                k +=1
+                break
+            if g.getcell(j, k) == 1:
+                c +=1
+            k +=1
+        j +=1
+    # if g.getcell(x - 1, y) == 1:
+    #     c += 1
+    # if g.getcell(x - 1, y - 1) == 1:
+    #     c += 1
+    # if g.getcell(x, y - 1) == 1:
+    #     c += 1
+    # if g.getcell(x - 1, y + 1) == 1:
+    #     c += 1
+    # if g.getcell(x, y + 1) == 1:
+    #     c += 1
+    # if g.getcell(x + 1, y + 1) == 1:
+    #     c += 1
+    # if g.getcell(x + 1, y - 1) == 1:
+    #     c += 1
+    # if g.getcell(x + 1, y) == 1:
+    #     c += 1
     return c
 
 
@@ -62,12 +73,15 @@ def main(width, height, update):
 
 try:
     g.new("Conway's Game of life")
+    g.setrule("Life")
+    g.setcolors([1, 255, 255, 255])
+    g.setcolors([0, 0, 0, 0])
     maxsize = 100000
     count = 0
-    width = int( g.getstring("Enter a width for the game of life:", "10") )
-    height = int( g.getstring("Enter a height for the game of life:", "10") )
+    width = int( g.getstring("Enter a width for the game of life:", "100") )
+    height = int( g.getstring("Enter a height for the game of life:", "100") )
     g.select([0, 0, width, height])
-    g.randfill(25)
+    g.randfill(50)
     update = [[0 for x in range(width + 1)] for x in range(height + 1)]
     while count < maxsize:
         g.show("In main " + str(count))
